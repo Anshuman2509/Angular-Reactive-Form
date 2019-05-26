@@ -1,0 +1,56 @@
+<form [formGroup]='myForm' (ngSubmit)='save()'>
+  <label>First Name</label>
+  <input type="text" formControlName='fName' ><br>
+  <div *ngIf='firstName.touched && firstName.invalid'>
+    <p *ngIf='firstName.errors.required'>Name is a requried field</p>
+    <p *ngIf='firstName.errors.minlength'>Min length should be 4.</p>
+  </div>
+  <label>Last Name</label>
+  <input type="text" formControlName='lName'><br>
+  <div *ngIf='lastName.touched && lastName.invalid'>
+    <p *ngIf='lastName.errors.required'>Last Name is a required field</p>
+    <p *ngIf='lastName.errors.minlength'>Min length should be 4</p>
+  </div>
+  <div formGroupName='address'>
+    <label>City</label>
+  <input type="text" formControlName='city'><br>
+  <div *ngIf='myCity.touched && myCity.invalid'>
+    <p *ngIf='myCity.errors.required'>City is a required field.</p>
+    <p *ngIf='myCity.errors.minlength'>Min length should be 4.</p>
+  </div>
+  <label>State</label>
+  <input type="text" formControlName='state'>
+  <div *ngIf='myState.touched && myState.invalid'>
+    <p *ngIf='myState.errors.required'>State is a required field</p>
+    <p *ngIf='myState.errors.minlength'>Min Length should be 4.</p>
+  </div>
+  </div>
+  <label>Program</label>
+  <input type="text" formControlName='program'><br>
+  <div *ngIf='myProgram.touched && myProgram.invalid'>
+    <p *ngIf='myProgram.errors.required'>Program is a required field</p>
+    <p *ngIf='myProgram.errors.forbidden'>Java is the only allowed program.</p>
+  </div>
+  <label>Email</label>
+  <input type="text" formControlName='email'><br>
+  <div *ngIf='myEmail.touched && myEmail.invalid'>
+    <p *ngIf='myEmail.errors.required'>Email is a required field</p>
+  </div>
+  <input type="checkbox" formControlName='subscribe'><label>Receive promotional offers</label><br> 
+  <button type="button" (click)='addCar()'>Add</button><br>
+  <i>Cars</i>
+  <div formArrayName='cars'>
+    <div *ngFor='let a of myCars.controls;let u=index'>
+      <label>{{u}}</label>&nbsp;&nbsp;<input type="text" [formControlName]='u'>
+    </div>
+  </div>
+  <label>Password</label>
+  <input type="text" formControlName='password'><br>
+  <label>Confirm Password</label>
+  <input type="text" formControlName='confirmPassword'><br>
+  <p *ngIf='myGetForm.errors?.passwordMismatch'>Passwords dont match</p>
+  <button type="submit">Submit</button>
+</form>
+<p>{{myForm.value|json}}</p>
+<p>{{myForm.status}}</p>
+
